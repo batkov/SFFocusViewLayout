@@ -12,5 +12,5 @@ protocol Presenter {
     associatedtype Model
     associatedtype View
 
-    func presentModel(model: Model, inView view: View)
+    func presentModel(_ model: Model, inView view: View)
 }

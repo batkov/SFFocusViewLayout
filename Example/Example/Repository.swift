@@ -12,12 +12,12 @@ class Repository: DataSource {
 
     lazy var items: [Resource] = self.generateResourcesFromDocuments()
 
-    private func generateResourcesFromDocuments() -> [Resource] {
-        guard let fileURL = NSBundle.mainBundle()
-            .URLForResource(Constant.Filename, withExtension: Constant.Extension) else {
+    fileprivate func generateResourcesFromDocuments() -> [Resource] {
+        guard let fileURL = Bundle.main
+            .url(forResource: Constant.Filename, withExtension: Constant.Extension) else {
             fatalError("resource file not found")
         }
-        let resourcesFromPlist = NSArray(contentsOfURL: fileURL)!
+        let resourcesFromPlist = NSArray(contentsOf: fileURL)!
 
         return resourcesFromPlist.map { resourceDictionary in
             guard let dictionary = resourceDictionary as? [String : String] else {
@@ -29,7 +29,7 @@ class Repository: DataSource {
 }
 
 extension Repository {
-    private struct Constant {
+    fileprivate struct Constant {
         static let Filename = "Resources"
         static let Extension = "plist"
     }

@@ -10,7 +10,7 @@ import Foundation
 
 struct Parser: Mapper {
 
-    static func mapElement(element: [String: String]) -> Resource {
+    static func mapElement(_ element: [String: String]) -> Resource {
 
         guard let title = element[Resource.Constant.Title],
             let description = element[Resource.Constant.Description],

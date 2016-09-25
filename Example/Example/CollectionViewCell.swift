@@ -10,9 +10,9 @@ import UIKit
 
 protocol CollectionViewCellRender {
 
-    func setTitle(title: String)
-    func setDescription(description: String)
-    func setBackgroundImage(image: UIImage)
+    func setTitle(_ title: String)
+    func setDescription(_ description: String)
+    func setBackgroundImage(_ image: UIImage)
 }
 
 class CollectionViewCell: UICollectionViewCell {
@@ -27,13 +27,13 @@ class CollectionViewCell: UICollectionViewCell {
         // Initialization code
     }
 
-    override func applyLayoutAttributes(layoutAttributes: UICollectionViewLayoutAttributes) {
-        super.applyLayoutAttributes(layoutAttributes)
+    override func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {
+        super.apply(layoutAttributes)
 
         let featuredHeight: CGFloat = Constant.featuredHeight
         let standardHeight: CGFloat = Constant.standardHegiht
 
-        let delta = 1 - (featuredHeight - CGRectGetHeight(frame)) / (featuredHeight - standardHeight)
+        let delta = 1 - (featuredHeight - frame.height) / (featuredHeight - standardHeight)
 
         let minAlpha: CGFloat = Constant.minAlpha
         let maxAlpha: CGFloat = Constant.maxAlpha
@@ -42,7 +42,7 @@ class CollectionViewCell: UICollectionViewCell {
         overlayView.alpha = alpha
 
         let scale = max(delta, 0.5)
-        titleLabel.transform = CGAffineTransformMakeScale(scale, scale)
+        titleLabel.transform = CGAffineTransform(scaleX: scale, y: scale)
 
         descriptionLabel.alpha = delta
     }
@@ -50,15 +50,15 @@ class CollectionViewCell: UICollectionViewCell {
 
 extension CollectionViewCell: CollectionViewCellRender {
 
-    func setTitle(title: String) {
+    func setTitle(_ title: String) {
         self.titleLabel.text = title
     }
 
-    func setDescription(description: String) {
+    func setDescription(_ description: String) {
         self.descriptionLabel.text = description
     }
 
-    func setBackgroundImage(image: UIImage) {
+    func setBackgroundImage(_ image: UIImage) {
         self.backgroundImageView.image = image
     }
 

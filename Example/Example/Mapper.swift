@@ -12,5 +12,5 @@ protocol Mapper {
     associatedtype Input
     associatedtype Output
 
-    static func mapElement(element: Input) -> Output
+    static func mapElement(_ element: Input) -> Output
 }
